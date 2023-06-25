@@ -2,6 +2,7 @@ resource "aws_instance" "web" {
   ami           = "ami-0f5ee92e2d63afc18"       #Amazon Linux ubuntu differs with region
   instance_type = "t2.micro"
   security_groups = [aws_security_group.TF_SG.name]
+  key_name = "Capstone_key"
   
   tags = {
     Name = "Automated_prod_server_instance"
