@@ -1,10 +1,10 @@
 resource "aws_instance" "web" {
-  ami           = "ami-0f5ee92e2d63afc18"       #Amazon Linux ubuntu
+  ami           = "ami-0f5ee92e2d63afc18"       #Amazon Linux ubuntu differs with region
   instance_type = "t2.micro"
   security_groups = [aws_security_group.TF_SG.name]
   
   tags = {
-    Name = "Automated_prod_server"
+    Name = "Automated_prod_server_instance"
   }
 }
 
@@ -13,7 +13,7 @@ resource "aws_instance" "web" {
 resource "aws_security_group" "TF_SG" {
   name        = "security group using Terraform"
   description = "security group using Terraform"
-  vpc_id      = "vpc-011eb6390249210aa"
+  vpc_id      = "vpc-011eb6390249210aa"             #change to your default id
 
  
 
