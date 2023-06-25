@@ -1,0 +1,43 @@
+pipeline{
+    agent any
+    
+    tools {
+        terraform 'Terraform'
+    }
+    
+    stages{
+        stage("IAC Code checkout"){
+            steps{
+                echo "terraform code check out"
+                git branch: 'main', url: 'https://github.com/vamsikrishna918/Terraform-Ec2'
+            }
+        }
+        
+        stage("Terraform initialization"){
+            steps{
+                echo " initialization provider"
+                sh 'terraform init'
+            }
+        }
+        
+         stage("Review the changes"){
+            steps{
+                echo " Review the infrastructure changes"
+                sh 'terraform plan'
+            }
+        }
+         stage("Apply the chnages"){
+            steps{
+                echo " Creating the infrastructure"
+                sh 'terraform apply -auto-approve'
+            }
+        }
+        //  stage("Destory the chnages"){
+        //     steps{
+        //         echo " Destroy the infrastructure"
+        //         sh 'terraform destroy -auto-approve'
+        //     }
+        // }
+        
+    }
+}
